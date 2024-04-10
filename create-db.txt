@@ -1,0 +1,29 @@
+create table cliente(
+	id serial primary key,
+	nome varchar(50),
+	telefone varchar(11),
+	cpf varchar(11)
+);
+
+create table produto(
+	id serial primary key,
+	descricao varchar(255)
+);
+
+create table venda(
+	id serial primary key,
+	cliente_id int references cliente(id),
+	valor_total decimal,
+	desconto_total decimal,
+	qtd_total_itens int
+);
+
+create table item_venda(
+	produto_id int references produto(id),
+	venda_id int references venda(id),
+	descricao varchar(255),
+	qtd int,
+	vlr_unitario decimal,
+	vlr_total decimal,
+	desconto_un decimal
+);
