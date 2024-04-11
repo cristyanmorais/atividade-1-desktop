@@ -5,10 +5,13 @@
 package top.dribles.projeto;
 
 import jakarta.persistence.EntityManager;
+import java.util.List;
+import javax.swing.JFrame;
 import top.dribles.projeto.dao.ClienteDAO;
 import top.dribles.projeto.dao.ClienteDAOImpl;
 import top.dribles.projeto.model.Cliente;
 import top.dribles.projeto.util.EntityManagerUtil;
+import top.dribles.projeto.view.tablemodel.panel.ListarCliente;
 
 /**
  *
@@ -17,23 +20,43 @@ import top.dribles.projeto.util.EntityManagerUtil;
 public class Projeto {
 
     public static void main(String[] args) {
-        // Obtendo EntityManager
-        EntityManager entityManager = EntityManagerUtil.getManager();
+//        // Obtendo EntityManager
+//    EntityManager entityManager = EntityManagerUtil.getManager();
+//    
+//    // Instanciando ClienteDAO
+//    ClienteDAO clienteDAO = new ClienteDAOImpl(entityManager);
+//    
+//    // Encontrando todos os clientes
+//    List<Cliente> listCliente = clienteDAO.findAll();
+//    
+//    // Verificando se a lista de clientes não está vazia
+//    if (!listCliente.isEmpty()) {
+//        // Iterando sobre a lista de clientes e imprimindo suas informações
+//        for (Cliente cliente : listCliente) {
+//            System.out.println("ID: " + cliente.getId());
+//            System.out.println("Nome: " + cliente.getNome());
+//            // Adicione mais campos conforme necessário
+//            System.out.println("---------------------");
+//        }
+//    } else {
+//        System.out.println("Não há clientes cadastrados.");
+//    }
+//    
+//    // Fechando EntityManagerFactory
+//    EntityManagerUtil.closeEntityManagerFactory();
+//
+        // Criar uma instância do painel ListarCliente
+        ListarCliente listarCliente = new ListarCliente();
         
-        // Instanciando ClienteDAO
-        ClienteDAO clienteDAO = new ClienteDAOImpl(entityManager);
+        // Criar um JFrame para exibir o painel
+        JFrame frame = new JFrame("Sua Aplicação");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        // Encontrando cliente pelo ID
-        Cliente cliente = clienteDAO.findById(1); // Substitua 1 pelo ID desejado
+        // Adicionar o painel ao JFrame
+        frame.getContentPane().add(listarCliente);
         
-        // Verificando se o cliente foi encontrado
-        if (cliente != null) {
-            System.out.println("Cliente encontrado: " + cliente.getNome());
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
-        
-        // Fechando EntityManagerFactory
-        EntityManagerUtil.closeEntityManagerFactory();
+        // Configurar o tamanho e tornar visível
+        frame.pack();
+        frame.setVisible(true);
     }
 }
