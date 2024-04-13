@@ -7,6 +7,7 @@ package top.dribles.projeto.view.tablemodel.panel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import top.dribles.projeto.dao.ClienteDAO;
 import top.dribles.projeto.dao.ClienteDAOImpl;
 import top.dribles.projeto.dao.ProdutoDAO;
@@ -26,6 +27,7 @@ public class CadastroVenda extends javax.swing.JPanel {
     private ClienteDAO clienteDAO;
     private ProdutoDAO produtoDAO;
     private List<ItemVenda> itensVenda;
+    private VendaTableModel vendaTableModel;
 
     /**
      * Creates new form CadastroVenda
@@ -35,8 +37,10 @@ public class CadastroVenda extends javax.swing.JPanel {
         clienteDAO = new ClienteDAOImpl(EntityManagerUtil.getManager());
         produtoDAO = new ProdutoDAOImpl(EntityManagerUtil.getManager());
         itensVenda = new ArrayList<>();
+        vendaTableModel = new VendaTableModel(itensVenda);
         fetchClientes();
         fetchProdutos();
+        produtosTable.setModel(vendaTableModel);
     }
     
     private void fetchClientes() {
@@ -49,14 +53,8 @@ public class CadastroVenda extends javax.swing.JPanel {
     private void fetchProdutos() {
         List<Produto> produtos = produtoDAO.findAll();
         for (Produto produto : produtos) {
-            produtoCB.addItem(produto.getDescricao()); // Adicione aqui o nome do cliente ao combobox
+            produtoCB.addItem(produto.getDescricao());
         }
-        
-        VendaTableModel model = 
-                new VendaTableModel(itensVenda);
-        
-        produtosTable.setModel(model);
-        produtosTable.repaint();
     }
     
     private void adicionarProduto() {
@@ -80,7 +78,7 @@ public class CadastroVenda extends javax.swing.JPanel {
                 return;
             }
             
-            Produto produtoSelecionado = produtoDAO.findAll().get(indiceProdutoSelecionado);
+            Produto produtoSelecionado = produtoDAO.findAll().get(indiceProdutoSelecionado - 1);
             int idProdutoSelecionado = produtoSelecionado.getId();
             
             ItemVenda itemVenda = new ItemVenda();
@@ -100,7 +98,7 @@ public class CadastroVenda extends javax.swing.JPanel {
             System.out.println("Produto ID: " + item.getProduto_id() + ", Desconto Unitário: " + item.getDesconto_un() + ", Quantidade: " + item.getQtd() + ", Valor Unitário: " + item.getVlr_unitario());
         }
         
-        ((VendaTableModel) produtosTable.getModel()).fireTableDataChanged();
+        vendaTableModel.setItensVenda(itensVenda);
     }
 
     /**
@@ -417,7 +415,4 @@ public class CadastroVenda extends javax.swing.JPanel {
     private javax.swing.JTextField vlrTotalTF;
     private javax.swing.JTextField vlrUnitarioTF;
     // End of variables declaration//GEN-END:variables
-
-    
-    
 }
