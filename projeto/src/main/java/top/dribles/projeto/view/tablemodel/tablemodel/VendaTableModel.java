@@ -12,8 +12,9 @@ import top.dribles.projeto.model.ItemVenda;
 public class VendaTableModel extends DefaultTableModel {
     
     public VendaTableModel() {
-        this.addColumn("Id");
-        this.addColumn("Desconto");
+//        this.addColumn("Id");
+//        this.addColumn("Desconto");
+        this.addColumn("Descricao");
         this.addColumn("Quantidade");
         this.addColumn("Valor");
     }
@@ -26,8 +27,9 @@ public class VendaTableModel extends DefaultTableModel {
     public void addItensVenda(List<ItemVenda> listItemVenda) {
         for (ItemVenda itemVenda : listItemVenda) {
             this.addRow(new Object[] {
-                itemVenda.getProduto_id(),
-                itemVenda.getDesconto_un(),
+//                itemVenda.getProduto_id(),
+//                itemVenda.getDesconto_un(),
+                itemVenda.getDescricao(),
                 itemVenda.getQtd(),
                 itemVenda.getVlr_unitario()
             });

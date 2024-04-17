@@ -18,7 +18,7 @@ create table venda(
 	qtd_total_itens int
 );
 
-create table item_venda(
+create table itemvenda(
 	produto_id int references produto(id),
 	venda_id int references venda(id),
 	descricao varchar(255),
@@ -27,3 +27,14 @@ create table item_venda(
 	vlr_total decimal,
 	desconto_un decimal
 );
+
+insert into cliente(nome, telefone, cpf) values
+('Igor Vieira', '45998420084', '24592569067'),
+('Eduardo Siqueira', '45991440384', '51190845083'),
+('Samuel Damasceno', '45992454056', '76739287015');
+
+insert into produto(descricao) values
+('Copo de Liquidificador'),
+('Um pé de Chinelo'),
+('Camiseta Manga Longa com só uma Manga'),
+('Cd Virgem Riscado');

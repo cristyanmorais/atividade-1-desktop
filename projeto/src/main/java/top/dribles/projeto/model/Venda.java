@@ -4,13 +4,22 @@
  */
 package top.dribles.projeto.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  *
  * @author crist
  */
+
+@Entity
 public class Venda {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Cliente cliente;
+    private int cliente_id;
     private double valor_total;
     private double desconto_total;
     private int qtd_total_itens;
@@ -18,9 +27,9 @@ public class Venda {
     public Venda() {
     }
 
-    public Venda(int id, Cliente cliente, double valor_total, double desconto_total, int qtd_total_itens) {
+    public Venda(int id, int cliente_id, double valor_total, double desconto_total, int qtd_total_itens) {
         this.id = id;
-        this.cliente = cliente;
+        this.cliente_id = cliente_id;
         this.valor_total = valor_total;
         this.desconto_total = desconto_total;
         this.qtd_total_itens = qtd_total_itens;
@@ -34,12 +43,12 @@ public class Venda {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getCliente_id() {
+        return cliente_id;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente_id(int cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
     public double getValor_total() {

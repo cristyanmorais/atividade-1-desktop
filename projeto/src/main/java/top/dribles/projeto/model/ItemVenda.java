@@ -4,13 +4,19 @@
  */
 package top.dribles.projeto.model;
 
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+
 /**
  *
  * @author crist
  */
+@Entity
 public class ItemVenda {
-    private int produto_id;
-    private int venda_id;
+    
+    @EmbeddedId
+    private ItemVendaId id;
+    
     private String descricao;
     private int qtd;
     private double vlr_unitario;
@@ -20,20 +26,12 @@ public class ItemVenda {
     public ItemVenda() {
     }
 
-    public int getProduto_id() {
-        return produto_id;
+    public ItemVendaId getId() {
+        return id;
     }
 
-    public void setProduto_id(int produto_id) {
-        this.produto_id = produto_id;
-    }
-
-    public int getVenda_id() {
-        return venda_id;
-    }
-
-    public void setVenda_id(int venda_id) {
-        this.venda_id = venda_id;
+    public void setId(ItemVendaId id) {
+        this.id = id;
     }
 
     public String getDescricao() {
